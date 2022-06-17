@@ -15,6 +15,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   url_launcher: ^6.1.3
   lottie: ^1.3.0
+  flutter_countdown_timer: ^4.1.0
+  dio: ^4.0.6
+  bloc: ^8.0.3
+  flutter_bloc: ^8.0.1
+  fluttertoast: ^8.0.9
+  provider: ^6.0.3
   flutter_native_splash: ^2.2.3+1
 flutter_native_splash:
   color: "$#00092b"

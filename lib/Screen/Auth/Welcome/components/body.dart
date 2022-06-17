@@ -3,6 +3,7 @@ import 'package:funny_macro/Constants/style.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../Constants/constants.dart';
+import '../../Login/LoginScreen.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -30,12 +31,16 @@ class Body extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                        onPressed: () => Navigator.pushNamed(context, '/login'),
+                        onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen())),
                         child: const Text("Giriş Yap")),
                   ),
                 ],
               ),
             ),
+            SizedBox(height: kDefaultPadding),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
               child: Row(

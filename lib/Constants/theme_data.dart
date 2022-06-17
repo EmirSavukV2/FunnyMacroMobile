@@ -25,4 +25,14 @@ ThemeData kThemeData = ThemeData(
       900: Color(0xff981380), //100%
     },
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: kDefaultPadding),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))),
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: OutlinedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: kDefaultPadding),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))),
+  ),
 );
