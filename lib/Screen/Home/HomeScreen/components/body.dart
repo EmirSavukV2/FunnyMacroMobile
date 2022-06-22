@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_countdown_timer/index.dart';
-import 'package:lottie/lottie.dart';
-
-import 'package:funny_macro/Constants/style.dart';
+part of '../home_screen.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  final LoginModel userData;
+
+  const Body({Key? key, required this.userData}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     List<Widget> macroFunctionButton = [
@@ -33,7 +31,8 @@ class Body extends StatelessWidget {
       ItemSlotTile(title: "Slot 5"),
       ItemSlotTile(title: "Slot 5"),
     ];
-    int endTime = DateTime.now().millisecondsSinceEpoch + 1000 * 50;
+    String remeningDay = '1658491976';
+    int endTime = int.parse(remeningDay) * 1000;
     bool _timerEnd = false;
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -47,7 +46,7 @@ class Body extends StatelessWidget {
               children: [
                 Container(
                   height: size.height * 0.2,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     border: Border(
                       bottom: BorderSide(
                         color: kPrimaryColor,
@@ -69,25 +68,27 @@ class Body extends StatelessWidget {
                                   child: Container(
                                     decoration: const BoxDecoration(
                                         borderRadius: BorderRadius.all(
-                                            const Radius.circular(14)),
+                                            Radius.circular(14)),
                                         image: DecorationImage(
                                             image: AssetImage(
                                                 "assets/images/funny_logo.png"))),
                                   ),
                                 ),
                               ),
-                              title: const Text("Emir Savuk"),
-                              subtitle: const Text("emirsvk55@gmail.com"),
+                              title: Text(userData.userName),
+                              subtitle: Text(userData.email),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             child: ListTile(
-                              title: Align(
+                              title: const Align(
                                   alignment: Alignment.centerRight,
                                   child: Text("Last Login")),
                               subtitle: Align(
                                   alignment: Alignment.centerRight,
-                                  child: const Text("12.34.2022")),
+                                  child: Text(DateFormat.yMd().format(
+                                      DateTime.fromMillisecondsSinceEpoch(
+                                          userData.lastLogin * 1000)))),
                             ),
                           )
                         ],
@@ -160,7 +161,13 @@ class Body extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: kDefaultPadding),
-                TextButton(onPressed: () {}, child: Text("Çıkış Yap"))
+                TextButton(
+                    onPressed: () {
+                      print(DateTime.fromMillisecondsSinceEpoch(
+                          (DateTime.now().millisecondsSinceEpoch +
+                              (1000 * 50))));
+                    },
+                    child: const Text("Çıkış Yap"))
               ],
             ),
           ),
@@ -206,7 +213,6 @@ class _MacroButtonState extends State<MacroButton>
       onTap: () {
         (_isActive) ? _controller.stop() : _controller.repeat();
         _isActive = !_isActive;
-
         onTap;
         setState(() {});
       },

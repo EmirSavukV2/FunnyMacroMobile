@@ -17,8 +17,10 @@ void _login(Login event, Emitter<LoginState> emit) async {
 
   emit(LoginWaiting());
   try {
-    List<LoginModel> data =
-        await _apiProvider.login(event.email, event.password, event.apiToken);
+    List<LoginModel> data = await _apiProvider.login(
+      event.email,
+      event.password,
+    );
     emit(LoginSuccess(loginData: data));
   } catch (ex) {
     if (ex != 'cancel') {

@@ -1,7 +1,12 @@
-import 'package:flutter/material.dart';
+library home_screen;
 
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../../../model/login_model.dart';
-import 'components/body.dart';
+import 'package:flutter_countdown_timer/index.dart';
+import 'package:lottie/lottie.dart';
+import 'package:funny_macro/Constants/style.dart';
+part './components/body.dart';
 
 class HomeScreen extends StatelessWidget {
   final LoginModel loginData;
@@ -10,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Body(),
+      body: Body(userData: loginData),
     );
   }
 }

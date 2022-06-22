@@ -14,7 +14,10 @@ class ApiProvider {
   late Response response;
   String connErr = 'Please check your internet connection and try again';
 
-  Future<Response> postConnect(url, data, apiToken) async {
+  Future<Response> postConnect(
+    url,
+    data,
+  ) async {
     print('url : ' + url.toString());
     print('postData : ' + data.toString());
     try {
@@ -22,7 +25,7 @@ class ApiProvider {
       dio.options.connectTimeout = 30000; //5s
       dio.options.receiveTimeout = 25000;
 
-      return await dio.post(url, data: data, cancelToken: apiToken);
+      return await dio.post(url, data: data);
     } on DioError catch (e) {
       //print(e.toString()+' | '+url.toString());
       if (e.type == DioErrorType.response) {
@@ -45,21 +48,20 @@ class ApiProvider {
     }
   }
 
-  Future<List<LoginModel>> login(
-      String email, String password, apiToken) async {
+  Future<List<LoginModel>> login(String email, String password) async {
     var postData = {
-      'email': email,
+      'username': email,
       'password': password,
       'key': "key",
     };
-    response = await postConnect(LOGIN_API, postData, apiToken);
-    if (response.data['status'] == STATUS_OK) {
-      List responseList = response.data['data'];
-      List<LoginModel> listData =
-          responseList.map((f) => LoginModel.fromJson(f)).toList();
+    response = await postConnect(LOGIN_API, postData);
+    print(response.data.runtimeType);
+    if (response.data['app_status'] == STATUS_OK) {
+      final responseList = response.data;
+      List<LoginModel> listData = [LoginModel.fromJson(responseList)];
       return listData;
     } else {
-      throw response.data['msg'];
+      throw response.data['message'];
     }
   }
 }

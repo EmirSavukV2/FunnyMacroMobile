@@ -22,7 +22,6 @@ class _BodyState extends State<Body> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   late LoginBloc _loginBloc;
-  CancelToken apiToken = CancelToken();
   @override
   void initState() {
     _loginBloc = BlocProvider.of<LoginBloc>(context);
@@ -97,9 +96,9 @@ class _BodyState extends State<Body> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: () => _loginBloc.add(Login(
-                              email: emailController.text,
-                              password: passwordController.text,
-                              apiToken: apiToken)),
+                            email: emailController.text,
+                            password: passwordController.text,
+                          )),
                           child: const Text("Giriş Yap"),
                         ),
                       ),
