@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: kThemeData,
       darkTheme: kThemeData,
-      home: WelcomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

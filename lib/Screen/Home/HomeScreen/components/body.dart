@@ -10,16 +10,20 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> macroFunctionButton = [
       MacroButton(
-        animation: "assets/lottie/war.json",
+        animation: "assets/lottie/play.json",
+        title: "Botu Başlat",
       ),
       MacroButton(
-        animation: "assets/lottie/key_press.json",
+        animation: "assets/lottie/atak.json",
+        title: "Atak Başlat",
       ),
       MacroButton(
-        animation: "assets/lottie/war.json",
+        animation: "assets/lottie/zblock.json",
+        title: "Z Blok Başlat",
       ),
       MacroButton(
-        animation: "assets/lottie/key_press.json",
+        animation: "assets/lottie/rpr.json",
+        title: "RPR Başlat",
       ),
     ];
 
@@ -76,8 +80,8 @@ class Body extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              title: const Text("Emir Savuk"),
-                              subtitle: const Text("emirsvk55@gmail.com"),
+                              title: const Text("funny mac-ro"),
+                              subtitle: const Text("info@funnymacro.com"),
                             ),
                           ),
                           const Expanded(
@@ -87,7 +91,7 @@ class Body extends StatelessWidget {
                                   child: Text("Last Login")),
                               subtitle: Align(
                                   alignment: Alignment.centerRight,
-                                  child: const Text("12.34.2022")),
+                                  child: const Text("12.02.2022")),
                             ),
                           )
                         ],
@@ -171,11 +175,12 @@ class Body extends StatelessWidget {
 }
 
 class MacroButton extends StatefulWidget {
-  final String animation;
+  final String animation, title;
 
   MacroButton({
     Key? key,
     required this.animation,
+    required this.title,
   }) : super(key: key);
 
   @override
@@ -224,14 +229,14 @@ class _MacroButtonState extends State<MacroButton>
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  "Atak Durumu",
+                Text(
+                  widget.title,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
                 const Spacer(),
                 Lottie.asset(
                   widget.animation,
-                  width: MediaQuery.of(context).size.width / 2 -
+                  height: MediaQuery.of(context).size.width / 2 -
                       (kDefaultPadding * 4),
                   controller: _controller,
                   repeat: true,

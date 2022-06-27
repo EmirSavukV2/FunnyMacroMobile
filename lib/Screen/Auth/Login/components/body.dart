@@ -62,10 +62,7 @@ class _BodyState extends State<Body> {
           print('active : ' + state.loginData[0].active.toString());
           Navigator.pop(context);
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      HomeScreen(loginData: state.loginData[0])));
+              context, MaterialPageRoute(builder: (context) => HomeScreen()));
         }
       },
       child: SafeArea(
