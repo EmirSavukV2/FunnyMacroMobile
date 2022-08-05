@@ -9,14 +9,17 @@ import 'package:funny_macro/Constants/style.dart';
 part './components/body.dart';
 
 class HomeScreen extends StatelessWidget {
+  final LoginModel userData;
+
   const HomeScreen({
     Key? key,
+    required this.userData,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Body(userData: loginData),
+      body: Body(userData: userData),
     );
   }
 }
