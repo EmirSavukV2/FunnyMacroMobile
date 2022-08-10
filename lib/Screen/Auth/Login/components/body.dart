@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../Components/input_field.dart';
 import '../../../../bloc/authentication/login/login_bloc.dart';
 import '../../../../resuable/global_function.dart';
@@ -54,18 +55,15 @@ class _BodyState extends State<Body> {
           _globalFunction.showProgressDialog(context);
         }
         if (state is LoginSuccess) {
-          print('data login');
-          print('Username : ' + state.loginData[0].username);
-          print('email : ' + state.loginData[0].email);
-          print('lastLogin : ' + state.loginData[0].lastLogin.toString());
-          print('active : ' + state.loginData[0].active.toString());
           Navigator.pop(context);
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeScreen(
-                        userData: state.loginData[0],
-                      )));
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeScreen(
+                userData: state.loginData[0],
+              ),
+            ),
+          );
         }
       },
       child: SafeArea(
@@ -96,10 +94,18 @@ class _BodyState extends State<Body> {
                     children: [
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: () => _loginBloc.add(Login(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          )),
+                          onPressed: () async {
+                            _loginBloc.add(Login(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            ));
+                            final SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.setString(
+                                'email', emailController.text);
+                            sharedPreferences.setString(
+                                'pass', passwordController.text);
+                          },
                           child: const Text("Giriş Yap"),
                         ),
                       ),

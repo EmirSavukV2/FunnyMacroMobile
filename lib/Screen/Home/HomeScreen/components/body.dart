@@ -8,21 +8,21 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> macroFunctionButton = [
       MacroButton(
-        animation: "assets/lottie/play.json",
-        title: "Botu Başlat",
-      ),
+          animation: "assets/lottie/play.json",
+          title: "Botu Başlat",
+          status: userData.mobilStatus.bot),
       MacroButton(
-        animation: "assets/lottie/atak.json",
-        title: "Atak Başlat",
-      ),
+          animation: "assets/lottie/atak.json",
+          title: "Atak Başlat",
+          status: userData.mobilStatus.attack),
       MacroButton(
-        animation: "assets/lottie/zblock.json",
-        title: "Z Blok Başlat",
-      ),
+          animation: "assets/lottie/zblock.json",
+          title: "Z Blok Başlat",
+          status: userData.mobilStatus.zBlock),
       MacroButton(
-        animation: "assets/lottie/rpr.json",
-        title: "RPR Başlat",
-      ),
+          animation: "assets/lottie/rpr.json",
+          title: "RPR Başlat",
+          status: userData.mobilStatus.rpr),
     ];
 
     List<Widget> itemSlotRadio = [
@@ -35,8 +35,8 @@ class Body extends StatelessWidget {
       ItemSlotTile(title: "Slot 5"),
       ItemSlotTile(title: "Slot 5"),
     ];
-    String remeningDay = '1658491976';
-    int endTime = int.parse(remeningDay) * 1000;
+
+    int endTime = int.parse(userData.remainingDay) * 1000;
     bool _timerEnd = false;
     Size size = MediaQuery.of(context).size;
     return SafeArea(
@@ -166,10 +166,16 @@ class Body extends StatelessWidget {
                 ),
                 SizedBox(height: kDefaultPadding),
                 TextButton(
-                    onPressed: () {
-                      print(DateTime.fromMillisecondsSinceEpoch(
-                          (DateTime.now().millisecondsSinceEpoch +
-                              (1000 * 50))));
+                    onPressed: () async {
+                      final SharedPreferences sharedPreferences =
+                          await SharedPreferences.getInstance();
+                      sharedPreferences.remove('email');
+                      sharedPreferences.remove('pass');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const WelcomeScreen()),
+                      );
                     },
                     child: const Text("Çıkış Yap"))
               ],
@@ -182,12 +188,12 @@ class Body extends StatelessWidget {
 }
 
 class MacroButton extends StatefulWidget {
-  final String animation, title;
-
+  final String animation, title, status;
   MacroButton({
     Key? key,
     required this.animation,
     required this.title,
+    required this.status,
   }) : super(key: key);
 
   @override
@@ -197,8 +203,11 @@ class MacroButton extends StatefulWidget {
 class _MacroButtonState extends State<MacroButton>
     with TickerProviderStateMixin {
   void Function()? onTap;
-  bool _isActive = false;
+
   late final AnimationController _controller;
+
+  var status;
+
   @override
   void initState() {
     super.initState();
@@ -216,14 +225,13 @@ class _MacroButtonState extends State<MacroButton>
     return InkWell(
       borderRadius: BorderRadius.circular(24),
       onTap: () {
-        (_isActive) ? _controller.stop() : _controller.repeat();
-        _isActive = !_isActive;
+        // _isActive = !_isActive;
         onTap;
         setState(() {});
       },
       child: Container(
         decoration: BoxDecoration(
-            color: (_isActive) ? kPrimaryColor : Colors.transparent,
+            color: (widget.status == "1") ? kPrimaryColor : Colors.transparent,
             borderRadius: BorderRadius.circular(24),
             border: Border.all(color: kPrimaryColor, width: 2)),
         child: Center(

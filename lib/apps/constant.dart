@@ -11,4 +11,4 @@ const String GLOBAL_URL = 'https://funnymacro.com/api';
 const String SERVER_URL = 'https://funnymacro.com/api';
 //const String SERVER_URL = 'http://192.168.0.4/devkit/api';
 
-const String LOGIN_API = SERVER_URL + "/login";
+const String LOGIN_API = SERVER_URL + "/mobil/login";

@@ -12,7 +12,7 @@ import '../apps/constant.dart';
 class ApiProvider {
   Dio dio = Dio();
   late Response response;
-  String connErr = 'Please check your internet connection and try again';
+  String connErr = 'İnternet bağlantınızı kontrol ediniz!!';
 
   Future<Response> postConnect(
     url,
@@ -27,7 +27,7 @@ class ApiProvider {
 
       return await dio.post(url, data: data);
     } on DioError catch (e) {
-      //print(e.toString()+' | '+url.toString());
+      print(e.toString() + ' | ' + url.toString());
       if (e.type == DioErrorType.response) {
         int? statusCode = e.response!.statusCode;
         if (statusCode == STATUS_NOT_FOUND) {

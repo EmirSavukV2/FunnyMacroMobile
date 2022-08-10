@@ -1,23 +1,26 @@
 import 'dart:convert';
 
+import 'package:funny_macro/model/status_model.dart';
+
 LoginModel LoginModelFromJson(String str) =>
     LoginModel.fromJson(json.decode(str));
 
 String LoginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
-  late String username;
-  late String email;
-  late String firstName;
-  late String lastName;
-  late String isActive;
-  late String remainingDay;
-  late int lastLogin;
-  late String ipAddress;
-  late String userName;
-  late String isTester;
-  late String isAdmin;
-  late int active;
+  String username;
+  String email;
+  String firstName;
+  String lastName;
+  String isActive;
+  String remainingDay;
+  int lastLogin;
+  String ipAddress;
+  String userName;
+  String isTester;
+  String isAdmin;
+  int active;
+  MobilStatus mobilStatus;
   LoginModel({
     required this.username,
     required this.email,
@@ -31,23 +34,26 @@ class LoginModel {
     required this.isTester,
     required this.isAdmin,
     required this.active,
+    required this.mobilStatus,
   });
 
-  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-        username: json["username"],
-        email: json["email"],
-        firstName: json["first_name"],
-        lastName: json["last_name"],
-        isActive: json["is_active"],
-        remainingDay: json["remaining_day"],
-        lastLogin: json["last_login"],
-        ipAddress: json["ip_address"],
-        userName: json["user_name"],
-        isTester: json["is_tester"],
-        isAdmin: json["is_admin"],
-        active: json["active"],
-      );
-
+  factory LoginModel.fromJson(Map<String, dynamic> jsons) {
+    return LoginModel(
+      username: jsons["username"],
+      email: jsons["email"],
+      firstName: jsons["first_name"],
+      lastName: jsons["last_name"],
+      isActive: jsons["is_active"],
+      remainingDay: jsons["remaining_day"],
+      lastLogin: jsons["last_login"],
+      ipAddress: jsons["ip_address"],
+      userName: jsons["user_name"],
+      isTester: jsons["is_tester"],
+      isAdmin: jsons["is_admin"],
+      active: jsons["active"],
+      mobilStatus: MobilStatus.fromJson(json.decode(jsons["mobil_status"])),
+    );
+  }
   Map<String, dynamic> toJson() => {
         "username": username,
         "email": email,
@@ -61,5 +67,6 @@ class LoginModel {
         "is_tester": isTester,
         "is_admin": isAdmin,
         "active": active,
+        "mobil_status": mobilStatus.toJson()
       };
 }

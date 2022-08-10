@@ -23,12 +23,12 @@ class LoginInputField extends StatelessWidget {
       },
       keyboardType: TextInputType.emailAddress,
       style: const TextStyle(
-          fontSize: 16, color: kPrimaryColor, fontWeight: FontWeight.bold),
+          fontSize: 16, color: kPrimaryColor, fontWeight: FontWeight.normal),
       decoration: InputDecoration(
         filled: true,
         hintText: hintText,
         hintStyle: TextStyle(
-            color: kTextColor.withOpacity(0.8), fontWeight: FontWeight.w600),
+            color: kTextColor.withOpacity(0.8), fontWeight: FontWeight.normal),
         fillColor: Colors.transparent,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 0.0, horizontal: 0.0),
@@ -74,11 +74,11 @@ class _PasswordInputState extends State<PasswordInput> {
       controller: widget.textEditingController,
       obscureText: !pwdVisibility,
       style: const TextStyle(
-          fontSize: 16, color: kPrimaryColor, fontWeight: FontWeight.bold),
+          fontSize: 16, color: kPrimaryColor, fontWeight: FontWeight.normal),
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: TextStyle(
-            color: kTextColor.withOpacity(0.8), fontWeight: FontWeight.w600),
+            color: kTextColor.withOpacity(0.8), fontWeight: FontWeight.normal),
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: primaryColor, width: 1.0),
         ),

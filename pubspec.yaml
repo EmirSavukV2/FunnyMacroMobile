@@ -22,6 +22,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   fluttertoast: ^8.0.9
   provider: ^6.0.3
+  shared_preferences: ^2.0.15
   flutter_native_splash: ^2.2.3+1
 flutter_native_splash:
   color: "$#00092b"
